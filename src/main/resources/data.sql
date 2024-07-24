@@ -1,0 +1,2 @@
+-- INSERT IGNORE INTO true_or_false_flashcards (question, answer) VALUES ( 'Is this working?', true);
+INSERT IGNORE INTO true_or_false_flashcards (question, answer) VALUES ( 'Is this not working?', false);
