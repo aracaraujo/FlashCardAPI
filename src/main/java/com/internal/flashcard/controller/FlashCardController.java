@@ -1,5 +1,6 @@
 package com.internal.flashcard.controller;
 
+import com.internal.flashcard.model.FlashCardDefinition;
 import com.internal.flashcard.model.FlashCardTF;
 import com.internal.flashcard.service.FlashCardService;
 import org.springframework.http.MediaType;
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
+import java.util.Optional;
 
 @Controller
 @RequestMapping(value = "/flashcard")
@@ -19,10 +21,23 @@ public class FlashCardController {
         this.flashCardService = flashCardService;
     }
 
-    @GetMapping(value = "/AllTrueOrFalse")
+    /*
+    TRUE OR FALSE FLASHCARD CONTROLLERS
+     */
+    @GetMapping(value = "/TrueOrFalse")
     public ResponseEntity<Iterable<FlashCardTF>> getAllFlashCardTF() {
         Iterable<FlashCardTF> flashCardsTF = flashCardService.getAllFlashCardTF();
         return ResponseEntity.ok().body(flashCardsTF);
+    }
+
+    @GetMapping(value = "/TrueOrFalse/{id}")
+    public ResponseEntity<FlashCardTF> getFlashCardTFById(@PathVariable Long id) {
+        Optional<FlashCardTF> flashCardTF = flashCardService.getFlashCardTFById(id);
+        if(flashCardTF.isPresent()){
+            return ResponseEntity.ok().body(flashCardTF.get());
+        }else{
+            return ResponseEntity.notFound().build();
+        }
     }
 
     @PostMapping(value = "/TrueOrFalse", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -39,5 +54,14 @@ public class FlashCardController {
         flashCardService.deleteFlashCardTF(id);
         return ResponseEntity
                 .ok().body(String.format("Flashcard deleted: /flashcard/TrueOrFalse/%s", id));
+    }
+
+    /*
+    DEFINITION FLASHCARD CONTROLLERS
+     */
+    @GetMapping(value = "/Definition")
+    public ResponseEntity<Iterable<FlashCardDefinition>> getAllFlashCardDefinition() {
+        Iterable<FlashCardDefinition> flashCardsDefinition = flashCardService.getAllFlashCardDefinition();
+        return ResponseEntity.ok().body(flashCardsDefinition);
     }
 }

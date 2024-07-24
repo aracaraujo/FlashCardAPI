@@ -2,7 +2,7 @@ package com.internal.flashcard.model;
 
 import jakarta.persistence.*;
 
-@Table(name = "true_or_false_flashcards")
+@Table(name = "true_false_flashcards")
 @Entity
 public class FlashCardTF {
 

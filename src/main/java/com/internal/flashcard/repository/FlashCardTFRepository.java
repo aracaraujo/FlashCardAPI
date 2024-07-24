@@ -5,4 +5,4 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface FlashCardRepository extends CrudRepository<FlashCardTF, Long> {}
+public interface FlashCardTFRepository extends CrudRepository<FlashCardTF, Long> {}

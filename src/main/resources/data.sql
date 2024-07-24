@@ -1,2 +1,2 @@
--- INSERT IGNORE INTO true_or_false_flashcards (question, answer) VALUES ( 'Is this working?', true);
-INSERT IGNORE INTO true_or_false_flashcards (question, answer) VALUES ( 'Is this not working?', false);
+INSERT IGNORE INTO true_false_flashcards (question, answer) VALUES ( 'Is the world flat?', false);
+INSERT IGNORE INTO definition_flashcards (question, answer) VALUES ( 'What is the definition of an object?', 'Is an instance of a class');
