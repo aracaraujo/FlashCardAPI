@@ -13,12 +13,15 @@ public class FlashCardTF {
     private String question;
     @Column(name = "answer")
     private Boolean answer;
+    @Column(name = "user_id")
+    private Long userID;
 
     public FlashCardTF() {}
 
-    public FlashCardTF(String question, Boolean answer){
+    public FlashCardTF(String question, Boolean answer, Long userID){
         this.question = question;
         this.answer = answer;
+        this.userID = userID;
     }
 
     public Long getId(){
@@ -39,6 +42,14 @@ public class FlashCardTF {
 
     public void setQuestion(String question) {
         this.question = question;
+    }
+
+    public Long getUserID() {
+        return userID;
+    }
+
+    public void setUserID(Long userID) {
+        this.userID = userID;
     }
 
     public String toString(){

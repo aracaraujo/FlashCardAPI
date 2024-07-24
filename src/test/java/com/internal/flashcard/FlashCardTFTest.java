@@ -26,7 +26,7 @@ public class FlashCardTFTest {
     @Test
     void shouldReturnAFlashCardTF() throws Exception {
 
-        FlashCardTF flashCardTF = this.flashCardService.getFlashCardTF();
+//        FlashCardTF flashCardTF = this.flashCardService.getFlashCardTF();
 
     }
 

@@ -13,12 +13,15 @@ public class FlashCardDefinition {
     private String question;
     @Column(name = "answer")
     private String answer;
+    @Column(name = "user_id")
+    private Long userID;
 
     public FlashCardDefinition() {}
 
-    public FlashCardDefinition(String question, String answer) {
+    public FlashCardDefinition(String question, String answer, Long userID) {
         this.question = question;
         this.answer = answer;
+        this.userID = userID;
     }
 
     public String getQuestion() {
@@ -39,6 +42,14 @@ public class FlashCardDefinition {
 
     public Long getId() {
         return id;
+    }
+
+    public Long getUserID() {
+        return userID;
+    }
+
+    public void setUserID(Long userID) {
+        this.userID = userID;
     }
 
     public String toString(){
