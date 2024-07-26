@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 
 @Table(name = "definition_flashcards")
 @Entity
-public class FlashCardDefinition {
+public class FlashCardDEF {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -16,9 +16,9 @@ public class FlashCardDefinition {
     @Column(name = "user_id")
     private Long userID;
 
-    public FlashCardDefinition() {}
+    public FlashCardDEF() {}
 
-    public FlashCardDefinition(String question, String answer, Long userID) {
+    public FlashCardDEF(String question, String answer, Long userID) {
         this.question = question;
         this.answer = answer;
         this.userID = userID;
