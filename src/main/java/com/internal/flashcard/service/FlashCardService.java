@@ -36,7 +36,7 @@ public class FlashCardService {
     }
 
     // CREATE FLASHCARD
-    public ResponseEntity<String> createFlashCard(QuestionType type, String rawFlashCard) {
+    public ResponseEntity<String> createFlashCard(FlashCardType type, String rawFlashCard) {
         try{
             switch (type) {
                 case TF:
@@ -67,7 +67,7 @@ public class FlashCardService {
     }
 
     // DELETE FLASHCARD
-    public ResponseEntity<String> deleteFlashCard(QuestionType type, Long id) {
+    public ResponseEntity<String> deleteFlashCard(FlashCardType type, Long id) {
         try{
             switch (type) {
                 case TF:
@@ -90,7 +90,7 @@ public class FlashCardService {
     }
 
     // EDIT FLASHCARD
-    public ResponseEntity<String> editFlashCard(QuestionType type, String rawFlashCard) {
+    public ResponseEntity<String> editFlashCard(FlashCardType type, String rawFlashCard) {
         try{
             switch (type) {
                 case TF:

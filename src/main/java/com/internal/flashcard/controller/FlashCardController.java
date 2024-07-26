@@ -1,7 +1,7 @@
 package com.internal.flashcard.controller;
 
 import com.internal.flashcard.model.FlashCardCollection;
-import com.internal.flashcard.model.QuestionType;
+import com.internal.flashcard.model.FlashCardType;
 import com.internal.flashcard.service.FlashCardService;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -28,20 +28,20 @@ public class FlashCardController {
     // CREATE FLASHCARD
     @PostMapping(value = "/{type}", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public ResponseEntity<String> createFlashCardTF(@PathVariable QuestionType type, @RequestBody String rawFlashCard) {
+    public ResponseEntity<String> createFlashCardTF(@PathVariable FlashCardType type, @RequestBody String rawFlashCard) {
         return flashCardService.createFlashCard(type, rawFlashCard);
     }
 
     // DELETE FLASHCARD
     @DeleteMapping(value = "/{type}/{id}")
-    public ResponseEntity<String> deleteFlashCardTF(@PathVariable Long id, @PathVariable QuestionType type) {
+    public ResponseEntity<String> deleteFlashCardTF(@PathVariable Long id, @PathVariable FlashCardType type) {
         return flashCardService.deleteFlashCard(type,id);
     }
 
     // EDIT FLASHCARD
     @PutMapping(value = "/{type}")
     @ResponseBody
-    public ResponseEntity<String> editFlashCardTF(@PathVariable QuestionType type, @RequestBody String rawFlashCard) {
+    public ResponseEntity<String> editFlashCardTF(@PathVariable FlashCardType type, @RequestBody String rawFlashCard) {
         return flashCardService.editFlashCard(type, rawFlashCard);
     }
 
