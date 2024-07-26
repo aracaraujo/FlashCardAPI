@@ -8,11 +8,15 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface FlashCardMCRepository extends CrudRepository<FlashCardMC, Integer> {
+public interface FlashCardMCRepository extends CrudRepository<FlashCardMC, Long> {
 
     @Query(
             value = "SELECT * FROM multiple_choice_flashcards mc WHERE mc.user_id=:user_id",
             nativeQuery = true)
-    Iterable<FlashCardDEF> findAllByUserID(@Param("user_id") Long user_id);
+    Iterable<FlashCardMC> findAllByUserID(@Param("user_id") Long user_id);
 
+    @Query(
+            value = "SELECT COUNT(1) FROM multiple_choice_flashcards mc WHERE mc.user_id=:user_id",
+            nativeQuery = true)
+    int existsByUserId(@Param("user_id") Long user_id);
 }

@@ -2,12 +2,14 @@ package com.internal.flashcard.model;
 
 import jakarta.persistence.*;
 
+import static jakarta.persistence.GenerationType.IDENTITY;
+
 @Table(name = "true_false_flashcards")
 @Entity
 public class FlashCardTF {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = IDENTITY)
     private Long id;
     @Column(name = "question")
     private String question;

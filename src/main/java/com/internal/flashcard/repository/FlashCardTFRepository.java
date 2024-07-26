@@ -10,7 +10,12 @@ import org.springframework.stereotype.Repository;
 public interface FlashCardTFRepository extends CrudRepository<FlashCardTF, Long> {
 
     @Query(
-            value = "SELECT * FROM true_false_flashcards tf WHERE user_id=:user_id",
+            value = "SELECT * FROM true_false_flashcards tf WHERE tf.user_id=:user_id",
             nativeQuery = true)
     Iterable<FlashCardTF> findAllByUserID(@Param("user_id") Long user_id);
+
+    @Query(
+            value = "SELECT COUNT(1) FROM true_false_flashcards tf WHERE tf.user_id=:user_id",
+            nativeQuery = true)
+    int existsByUserId(@Param("user_id") Long user_id);
 }

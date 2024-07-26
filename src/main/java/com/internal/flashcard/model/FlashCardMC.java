@@ -1,14 +1,15 @@
 package com.internal.flashcard.model;
 
 import jakarta.persistence.*;
-import java.util.List;
+
+import static jakarta.persistence.GenerationType.IDENTITY;
 
 @Table(name = "multiple_choice_flashcards")
 @Entity
 public class FlashCardMC {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = IDENTITY)
     private Long id;
     @Column(name = "question")
     private String question;
@@ -61,10 +62,6 @@ public class FlashCardMC {
         this.userID = userID;
     }
 
-    public String toString(){
-        return String.format("FlashCard id: %d\nQuestion: %s\nAnswer: %b",id,question,answer);
-    }
-
     public String getOptionOne() {
         return optionOne;
     }
@@ -95,5 +92,9 @@ public class FlashCardMC {
 
     public void setOptionFour(String optionFour) {
         this.optionFour = optionFour;
+    }
+
+    public String toString(){
+        return String.format("FlashCard id: %d\nQuestion: %s\nAnswer: %b",id,question,answer);
     }
 }

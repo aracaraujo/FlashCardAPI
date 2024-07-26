@@ -3,19 +3,21 @@ package com.internal.flashcard.model;
 public class FlashCardCollection {
 
     private Iterable<FlashCardTF> flashCardsTF;
-    private Iterable<FlashCardDEF> flashCardsDefinition;
+    private Iterable<FlashCardDEF> flashCardsDEF;
+    private Iterable<FlashCardMC> flashCardsMC;
 
-    public FlashCardCollection(Iterable<FlashCardTF> flashCardsTF, Iterable<FlashCardDEF> flashCardsDefinition) {
+    public FlashCardCollection(Iterable<FlashCardTF> flashCardsTF, Iterable<FlashCardDEF> flashCardsDEF, Iterable<FlashCardMC> flashCardsMC) {
         this.flashCardsTF = flashCardsTF;
-        this.flashCardsDefinition = flashCardsDefinition;
+        this.flashCardsDEF = flashCardsDEF;
+        this.flashCardsMC = flashCardsMC;
     }
 
-    public Iterable<FlashCardDEF> getFlashCardsDefinition() {
-        return flashCardsDefinition;
+    public Iterable<FlashCardDEF> getFlashCardsDEF() {
+        return flashCardsDEF;
     }
 
-    public void setFlashCardsDefinition(Iterable<FlashCardDEF> flashCardsDefinition) {
-        this.flashCardsDefinition = flashCardsDefinition;
+    public void setFlashCardsDEF(Iterable<FlashCardDEF> flashCardsDEF) {
+        this.flashCardsDEF = flashCardsDEF;
     }
 
     public Iterable<FlashCardTF> getFlashCardsTF() {
@@ -24,5 +26,13 @@ public class FlashCardCollection {
 
     public void setFlashCardsTF(Iterable<FlashCardTF> flashCardsTF) {
         this.flashCardsTF = flashCardsTF;
+    }
+
+    public Iterable<FlashCardMC> getFlashCardsMC() {
+        return flashCardsMC;
+    }
+
+    public void setFlashCardsMC(Iterable<FlashCardMC> flashCardsMC) {
+        this.flashCardsMC = flashCardsMC;
     }
 }

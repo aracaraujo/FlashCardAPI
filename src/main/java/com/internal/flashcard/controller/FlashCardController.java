@@ -21,7 +21,7 @@ public class FlashCardController {
     // GET ALL FLASHCARDS
     @GetMapping(value = "/getAll/{userID}")
     public ResponseEntity<FlashCardCollection> getAllFlashCardTF(@PathVariable Long userID) {
-        FlashCardCollection flashCards = flashCardService.getAllFlashCardsByID(userID);
+        FlashCardCollection flashCards = flashCardService.getAllFlashCardsByUserID(userID);
         return ResponseEntity.ok().body(flashCards);
     }
 
@@ -29,20 +29,20 @@ public class FlashCardController {
     @PostMapping(value = "/{type}", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public ResponseEntity<String> createFlashCardTF(@PathVariable QuestionType type, @RequestBody String rawFlashCard) {
-        return flashCardService.createFlashCardTF(type, rawFlashCard);
+        return flashCardService.createFlashCard(type, rawFlashCard);
     }
 
     // DELETE FLASHCARD
     @DeleteMapping(value = "/{type}/{id}")
     public ResponseEntity<String> deleteFlashCardTF(@PathVariable Long id, @PathVariable QuestionType type) {
-        return flashCardService.deleteFlashCardTF(type,id);
+        return flashCardService.deleteFlashCard(type,id);
     }
 
     // EDIT FLASHCARD
     @PutMapping(value = "/{type}")
     @ResponseBody
     public ResponseEntity<String> editFlashCardTF(@PathVariable QuestionType type, @RequestBody String rawFlashCard) {
-        return flashCardService.editFlashCardTF(type, rawFlashCard);
+        return flashCardService.editFlashCard(type, rawFlashCard);
     }
 
 }

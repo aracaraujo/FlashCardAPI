@@ -14,4 +14,8 @@ public interface FlashCardDEFRepository extends CrudRepository<FlashCardDEF, Lon
             nativeQuery = true)
     Iterable<FlashCardDEF> findAllByUserID(@Param("user_id") Long user_id);
 
+    @Query(
+            value = "SELECT COUNT(1) FROM definition_flashcards def WHERE def.user_id=:user_id",
+            nativeQuery = true)
+    int existsByUserId(@Param("user_id") Long user_id);
 }
