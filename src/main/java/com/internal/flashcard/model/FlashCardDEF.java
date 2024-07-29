@@ -1,9 +1,12 @@
 package com.internal.flashcard.model;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.internal.flashcard.util.FlashCardDEFDeserializer;
 import jakarta.persistence.*;
 
 import static jakarta.persistence.GenerationType.IDENTITY;
 
+@JsonDeserialize(using = FlashCardDEFDeserializer.class)
 @Table(name = "definition_flashcards")
 @Entity
 public class FlashCardDEF {

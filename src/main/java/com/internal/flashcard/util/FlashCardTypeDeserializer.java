@@ -1,7 +1,6 @@
 package com.internal.flashcard.util;
 
 import com.fasterxml.jackson.core.JsonParser;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonDeserializer;
 import com.internal.flashcard.exceptions.InvalidFlashCardTypeException;
@@ -12,7 +11,7 @@ import java.io.IOException;
 public class FlashCardTypeDeserializer extends JsonDeserializer<FlashCardType> {
 
     @Override
-    public FlashCardType deserialize(JsonParser p, DeserializationContext ctxt) throws IOException, JsonProcessingException {
+    public FlashCardType deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
         String value = p.getText().toUpperCase();
         try{
             return FlashCardType.valueOf(value);
@@ -20,5 +19,4 @@ public class FlashCardTypeDeserializer extends JsonDeserializer<FlashCardType> {
             throw new InvalidFlashCardTypeException(String.format("Invalid FlashCardType: %s",value));
         }
     }
-
 }

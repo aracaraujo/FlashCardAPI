@@ -2,11 +2,11 @@ package com.internal.flashcard.exceptions;
 
 import com.internal.flashcard.model.FlashCardType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 
-@ControllerAdvice
+@RestControllerAdvice
 public class GlobalExceptionHandler {
 
     @ExceptionHandler(InvalidFlashCardTypeException.class)
@@ -22,6 +22,11 @@ public class GlobalExceptionHandler {
         if (ex.getRequiredType() == Long.class) {
             return ResponseEntity.badRequest().body(String.format("Invalid Id value: \"%s\". Id values must be positive integers.", ex.getValue()));
         }
+        return ResponseEntity.badRequest().body(ex.getMessage());
+    }
+
+    @ExceptionHandler(InvalidFlashCardException.class)
+    public ResponseEntity<String> handleInvalidFlashCardTFException(InvalidFlashCardException ex) {
         return ResponseEntity.badRequest().body(ex.getMessage());
     }
 }

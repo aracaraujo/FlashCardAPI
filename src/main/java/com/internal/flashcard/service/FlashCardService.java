@@ -43,26 +43,26 @@ public class FlashCardService {
                     FlashCardTF flashCardTF = this.objectMapper.readValue(rawFlashCard, FlashCardTF.class);
                     this.flashCardTFRepository.save(flashCardTF);
                     return ResponseEntity
-                            .created(URI.create(String.format("ID: %s", flashCardTF.getId())))
+                            .created(URI.create(String.format("/api/flashcard/%s", flashCardTF.getId())))
                             .body(String.format("New flashcard created id: %s", flashCardTF.getId()));
                 case DEF:
                     FlashCardDEF flashCardDEF = this.objectMapper.readValue(rawFlashCard, FlashCardDEF.class);
                     this.flashCardDEFRepository.save(flashCardDEF);
                     return ResponseEntity
-                            .created(URI.create(String.format("ID: %s", flashCardDEF.getId())))
+                            .created(URI.create(String.format("/api/flashcard/%s", flashCardDEF.getId())))
                             .body(String.format("New flashcard created id: %s", flashCardDEF.getId()));
                 case MC:
                     FlashCardMC flashCardMC = this.objectMapper.readValue(rawFlashCard, FlashCardMC.class);
                     this.flashCardMCRepository.save(flashCardMC);
                     return ResponseEntity
-                            .created(URI.create(String.format("ID: %s", flashCardMC.getId())))
+                            .created(URI.create(String.format("/api/flashcard/%s", flashCardMC.getId())))
                             .body(String.format("New flashcard created id: %s", flashCardMC.getId()));
                 default:
                     throw new Exception("Error with flashcard type.");
             }
         }catch (Exception e){
-            e.printStackTrace();
-            return null;
+            System.out.print(e.getMessage());
+            return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
 

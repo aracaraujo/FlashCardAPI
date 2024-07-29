@@ -1,6 +1,5 @@
 package com.internal.flashcard.repository;
 
-import com.internal.flashcard.model.FlashCardDEF;
 import com.internal.flashcard.model.FlashCardMC;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;

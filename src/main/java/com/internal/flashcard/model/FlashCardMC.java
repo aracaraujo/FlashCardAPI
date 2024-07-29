@@ -1,9 +1,12 @@
 package com.internal.flashcard.model;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.internal.flashcard.util.FlashCardMCDeserializer;
 import jakarta.persistence.*;
 
 import static jakarta.persistence.GenerationType.IDENTITY;
 
+@JsonDeserialize(using = FlashCardMCDeserializer.class)
 @Table(name = "multiple_choice_flashcards")
 @Entity
 public class FlashCardMC {
@@ -28,8 +31,12 @@ public class FlashCardMC {
 
     public FlashCardMC() {}
 
-    public FlashCardMC(String question, int answer, Long userID) {
+    public FlashCardMC(String question,String optionOne, String optionTwo, String optionThree, String optionFour, int answer, Long userID) {
         this.question = question;
+        this.optionOne = optionOne;
+        this.optionTwo = optionTwo;
+        this.optionThree = optionThree;
+        this.optionFour = optionFour;
         this.answer = answer;
         this.userID = userID;
     }
@@ -95,6 +102,6 @@ public class FlashCardMC {
     }
 
     public String toString(){
-        return String.format("FlashCard id: %d\nQuestion: %s\nAnswer: %b",id,question,answer);
+        return String.format("FlashCard id: %d\nQuestion: %s\n:Option One: %s\n:Option Two: %s\n:Option Three: %s\n:Option Four: %s\nAnswer: %b",id,question,optionOne,optionTwo,optionThree,optionFour,answer);
     }
 }
