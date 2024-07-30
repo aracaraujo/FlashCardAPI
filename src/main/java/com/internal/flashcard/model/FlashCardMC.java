@@ -4,6 +4,8 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.internal.flashcard.util.FlashCardMCDeserializer;
 import jakarta.persistence.*;
 
+import java.time.LocalDate;
+
 import static jakarta.persistence.GenerationType.IDENTITY;
 
 @JsonDeserialize(using = FlashCardMCDeserializer.class)
@@ -27,18 +29,22 @@ public class FlashCardMC {
     @Column(name = "answer")
     private int answer;
     @Column(name = "user_id")
-    private Long userID;
+    private Long userId;
+    @Column(name = "date_creation", nullable = false)
+    private LocalDate dateCreation;
+    @Column(name = "last_modified", nullable = false)
+    private LocalDate lastModified;
 
     public FlashCardMC() {}
 
-    public FlashCardMC(String question,String optionOne, String optionTwo, String optionThree, String optionFour, int answer, Long userID) {
+    public FlashCardMC(String question,String optionOne, String optionTwo, String optionThree, String optionFour, int answer, Long userId) {
         this.question = question;
         this.optionOne = optionOne;
         this.optionTwo = optionTwo;
         this.optionThree = optionThree;
         this.optionFour = optionFour;
         this.answer = answer;
-        this.userID = userID;
+        this.userId = userId;
     }
 
     public String getQuestion() {
@@ -61,12 +67,12 @@ public class FlashCardMC {
         return id;
     }
 
-    public Long getUserID() {
-        return userID;
+    public Long getUserId() {
+        return userId;
     }
 
-    public void setUserID(Long userID) {
-        this.userID = userID;
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 
     public String getOptionOne() {
@@ -103,5 +109,21 @@ public class FlashCardMC {
 
     public String toString(){
         return String.format("FlashCard id: %d\nQuestion: %s\n:Option One: %s\n:Option Two: %s\n:Option Three: %s\n:Option Four: %s\nAnswer: %b",id,question,optionOne,optionTwo,optionThree,optionFour,answer);
+    }
+
+    public LocalDate getDateCreation() {
+        return dateCreation;
+    }
+
+    public void setDateCreation(LocalDate dateCreation) {
+        this.dateCreation = dateCreation;
+    }
+
+    public LocalDate getLastModified() {
+        return lastModified;
+    }
+
+    public void setLastModified(LocalDate lastModified) {
+        this.lastModified = lastModified;
     }
 }

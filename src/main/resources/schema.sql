@@ -3,6 +3,8 @@ CREATE TABLE IF NOT EXISTS true_false_flashcards(
     question varchar(100) not null,
     answer boolean not null,
     user_id BIGINT not null,
+    date_creation DATE,
+    last_modified DATE,
     PRIMARY key ( id )
 );
 
@@ -11,6 +13,8 @@ CREATE TABLE IF NOT EXISTS definition_flashcards(
     question varchar(100) not null,
     answer varchar(100) not null,
     user_id BIGINT not null,
+    date_creation DATE,
+    last_modified DATE,
     PRIMARY key ( id )
 );
 
@@ -23,5 +27,7 @@ CREATE TABLE IF NOT EXISTS multiple_choice_flashcards(
     option_four varchar(100) not null,
     answer varchar(100) not null,
     user_id BIGINT not null,
+    date_creation DATE,
+    last_modified DATE,
     PRIMARY key ( id )
 );

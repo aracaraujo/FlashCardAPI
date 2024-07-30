@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.net.URI;
+import java.time.LocalDate;
 
 @Service
 public class FlashCardService {
@@ -41,18 +42,21 @@ public class FlashCardService {
             switch (type) {
                 case TF:
                     FlashCardTF flashCardTF = this.objectMapper.readValue(rawFlashCard, FlashCardTF.class);
+                    flashCardTF.setDateCreation(LocalDate.now());
                     this.flashCardTFRepository.save(flashCardTF);
                     return ResponseEntity
                             .created(URI.create(String.format("/api/flashcard/%s", flashCardTF.getId())))
                             .body(String.format("New flashcard created id: %s", flashCardTF.getId()));
                 case DEF:
                     FlashCardDEF flashCardDEF = this.objectMapper.readValue(rawFlashCard, FlashCardDEF.class);
+                    flashCardDEF.setDateCreation(LocalDate.now());
                     this.flashCardDEFRepository.save(flashCardDEF);
                     return ResponseEntity
                             .created(URI.create(String.format("/api/flashcard/%s", flashCardDEF.getId())))
                             .body(String.format("New flashcard created id: %s", flashCardDEF.getId()));
                 case MC:
                     FlashCardMC flashCardMC = this.objectMapper.readValue(rawFlashCard, FlashCardMC.class);
+                    flashCardMC.setDateCreation(LocalDate.now());
                     this.flashCardMCRepository.save(flashCardMC);
                     return ResponseEntity
                             .created(URI.create(String.format("/api/flashcard/%s", flashCardMC.getId())))
@@ -95,14 +99,17 @@ public class FlashCardService {
             switch (type) {
                 case TF:
                     FlashCardTF flashCardTF = this.objectMapper.readValue(rawFlashCard, FlashCardTF.class);
+                    flashCardTF.setDateCreation(LocalDate.now().plusDays(1));
                     this.flashCardTFRepository.save(flashCardTF);
                     return ResponseEntity.ok().body(String.format("Flash card %s edited.\nNew value: %s", flashCardTF.getId(),flashCardTF));
                 case DEF:
                     FlashCardDEF flashCardDEF = this.objectMapper.readValue(rawFlashCard, FlashCardDEF.class);
+                    flashCardDEF.setDateCreation(LocalDate.now());
                     this.flashCardDEFRepository.save(flashCardDEF);
                     return ResponseEntity.ok().body(String.format("Flash card %s edited.\nNew value: \n%s", flashCardDEF.getId(), flashCardDEF));
                 case MC:
                     FlashCardMC flashCardMC = this.objectMapper.readValue(rawFlashCard, FlashCardMC.class);
+                    flashCardMC.setDateCreation(LocalDate.now());
                     this.flashCardMCRepository.save(flashCardMC);
                     return ResponseEntity.ok().body(String.format("Flash card %s edited.\nNew value: \n%s", flashCardMC.getId(), flashCardMC));
                 default:

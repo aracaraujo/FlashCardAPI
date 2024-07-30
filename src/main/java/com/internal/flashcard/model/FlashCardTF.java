@@ -3,7 +3,7 @@ package com.internal.flashcard.model;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.internal.flashcard.util.FlashCardTFDeserializer;
 import jakarta.persistence.*;
-
+import java.time.LocalDate;
 import static jakarta.persistence.GenerationType.IDENTITY;
 
 @JsonDeserialize(using = FlashCardTFDeserializer.class)
@@ -19,14 +19,18 @@ public class FlashCardTF {
     @Column(name = "answer", nullable = false)
     private Boolean answer;
     @Column(name = "user_id", nullable = false)
-    private Long user_id;
+    private Long userId;
+    @Column(name = "date_creation", nullable = false)
+    private LocalDate dateCreation;
+    @Column(name = "last_modified", nullable = false)
+    private LocalDate lastModified;
 
     public FlashCardTF() {}
 
-    public FlashCardTF(String question, Boolean answer, Long user_id){
+    public FlashCardTF(String question, Boolean answer, Long userId){
         this.question = question;
         this.answer = answer;
-        this.user_id = user_id;
+        this.userId = userId;
     }
 
     public Long getId(){
@@ -49,15 +53,31 @@ public class FlashCardTF {
         this.question = question;
     }
 
-    public Long getUser_id() {
-        return user_id;
+    public Long getUserId() {
+        return userId;
     }
 
-    public void setUser_id(Long user_id) {
-        this.user_id = user_id;
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 
     public String toString(){
-        return String.format("FlashCard id: %d\nQuestion: %s\nAnswer: %b\nUser ID: %s",id,question,answer, user_id);
+        return String.format("FlashCard id: %d\nQuestion: %s\nAnswer: %b\nUser ID: %s",id,question,answer, userId);
+    }
+
+    public LocalDate getDateCreation() {
+        return dateCreation;
+    }
+
+    public void setDateCreation(LocalDate dataTimeCreation) {
+        this.dateCreation = dataTimeCreation;
+    }
+
+    public LocalDate getLastModified() {
+        return lastModified;
+    }
+
+    public void setLastModified(LocalDate lastModified) {
+        this.lastModified = lastModified;
     }
 }
