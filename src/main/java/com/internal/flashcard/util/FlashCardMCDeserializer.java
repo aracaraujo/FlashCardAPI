@@ -22,7 +22,7 @@ public class FlashCardMCDeserializer extends JsonDeserializer<FlashCardMC> {
             String optionThree = node.get("optionThree").asText();
             String optionFour = node.get("optionFour").asText();
             int answer = node.get("answer").asInt();
-            Long user_id = node.get("user_id").asLong();
+            Long user_id = node.get("userId").asLong();
             return new FlashCardMC(question,optionOne,optionTwo,optionThree,optionFour,answer,user_id);
         }catch (IllegalArgumentException | JsonProcessingException | NullPointerException e){
             throw new InvalidFlashCardException("This value is not compatible to FlashCardDEF. FlashCardDEF requires String question,String optionOne, String optionTwo, String optionThree, String optionFour, int answer, and Long user_id");

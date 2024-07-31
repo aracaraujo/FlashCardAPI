@@ -18,8 +18,8 @@ public class FlashCardTFDeserializer extends JsonDeserializer<FlashCardTF> {
             JsonNode node = p.getCodec().readTree(p);
             String question = node.get("question").asText();
             Boolean answer = node.get("answer").asBoolean();
-            Long user_id = node.get("user_id").asLong();
-            return new FlashCardTF(question,answer,user_id);
+            Long userId = node.get("userId").asLong();
+            return new FlashCardTF(question,answer,userId);
         }catch (IllegalArgumentException | JsonProcessingException | NullPointerException e) {
             throw new InvalidFlashCardException("This value is not compatible to FlashCardTF. FlashCardTF requires String question, Boolean answer, and Long user_id");
         }

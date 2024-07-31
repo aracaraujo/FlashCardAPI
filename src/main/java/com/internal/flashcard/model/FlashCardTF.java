@@ -80,4 +80,8 @@ public class FlashCardTF {
     public void setLastModified(LocalDate lastModified) {
         this.lastModified = lastModified;
     }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 }

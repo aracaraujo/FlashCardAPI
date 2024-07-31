@@ -11,6 +11,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.net.URI;
 import java.time.LocalDate;
+import java.util.Optional;
 
 @Service
 public class FlashCardService {
@@ -43,6 +44,7 @@ public class FlashCardService {
                 case TF:
                     FlashCardTF flashCardTF = this.objectMapper.readValue(rawFlashCard, FlashCardTF.class);
                     flashCardTF.setDateCreation(LocalDate.now());
+                    flashCardTF.setLastModified(LocalDate.now());
                     this.flashCardTFRepository.save(flashCardTF);
                     return ResponseEntity
                             .created(URI.create(String.format("/api/flashcard/%s", flashCardTF.getId())))
@@ -50,6 +52,7 @@ public class FlashCardService {
                 case DEF:
                     FlashCardDEF flashCardDEF = this.objectMapper.readValue(rawFlashCard, FlashCardDEF.class);
                     flashCardDEF.setDateCreation(LocalDate.now());
+                    flashCardDEF.setLastModified(LocalDate.now());
                     this.flashCardDEFRepository.save(flashCardDEF);
                     return ResponseEntity
                             .created(URI.create(String.format("/api/flashcard/%s", flashCardDEF.getId())))
@@ -57,6 +60,7 @@ public class FlashCardService {
                 case MC:
                     FlashCardMC flashCardMC = this.objectMapper.readValue(rawFlashCard, FlashCardMC.class);
                     flashCardMC.setDateCreation(LocalDate.now());
+                    flashCardMC.setLastModified(LocalDate.now());
                     this.flashCardMCRepository.save(flashCardMC);
                     return ResponseEntity
                             .created(URI.create(String.format("/api/flashcard/%s", flashCardMC.getId())))
@@ -99,17 +103,22 @@ public class FlashCardService {
             switch (type) {
                 case TF:
                     FlashCardTF flashCardTF = this.objectMapper.readValue(rawFlashCard, FlashCardTF.class);
-                    flashCardTF.setDateCreation(LocalDate.now().plusDays(1));
+//                    flashCardTF.setDateCreation(LocalDate.now().plusDays(1));
                     this.flashCardTFRepository.save(flashCardTF);
                     return ResponseEntity.ok().body(String.format("Flash card %s edited.\nNew value: %s", flashCardTF.getId(),flashCardTF));
                 case DEF:
                     FlashCardDEF flashCardDEF = this.objectMapper.readValue(rawFlashCard, FlashCardDEF.class);
-                    flashCardDEF.setDateCreation(LocalDate.now());
+                    Optional<FlashCardDEF> oldFlashCardDEF = this.flashCardDEFRepository.findById(flashCardDEF.getId());
+                    if (oldFlashCardDEF.isEmpty()){
+                        throw new Exception("The flashcard can not be edited because it does not exist.");
+                    }
+                    flashCardDEF.setDateCreation(oldFlashCardDEF.get().getDateCreation());
+                    flashCardDEF.setLastModified(LocalDate.now());
                     this.flashCardDEFRepository.save(flashCardDEF);
                     return ResponseEntity.ok().body(String.format("Flash card %s edited.\nNew value: \n%s", flashCardDEF.getId(), flashCardDEF));
                 case MC:
                     FlashCardMC flashCardMC = this.objectMapper.readValue(rawFlashCard, FlashCardMC.class);
-                    flashCardMC.setDateCreation(LocalDate.now());
+//                    flashCardMC.setDateCreation(LocalDate.now());
                     this.flashCardMCRepository.save(flashCardMC);
                     return ResponseEntity.ok().body(String.format("Flash card %s edited.\nNew value: \n%s", flashCardMC.getId(), flashCardMC));
                 default:
@@ -117,7 +126,7 @@ public class FlashCardService {
             }
         }catch (Exception e){
             e.printStackTrace();
-            return null;
+            return ResponseEntity.badRequest().body(String.format("Error trying to edit flashcard.\nError: %s",e.getMessage()));
         }
     }
 }

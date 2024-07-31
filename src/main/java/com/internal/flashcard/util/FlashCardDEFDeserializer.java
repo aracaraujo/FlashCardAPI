@@ -16,11 +16,17 @@ public class FlashCardDEFDeserializer extends JsonDeserializer<FlashCardDEF> {
     @Override
     public FlashCardDEF deserialize(JsonParser p, DeserializationContext deserializationContext) throws IOException, JacksonException {
         try{
+            FlashCardDEF flashCardDEF = new FlashCardDEF();
             JsonNode node = p.getCodec().readTree(p);
-            String question = node.get("question").asText();
-            String answer = node.get("answer").asText();
-            Long user_id = node.get("user_id").asLong();
-            return new FlashCardDEF(question,answer,user_id);
+            Long id;
+            if (node.has("id")){
+                id = node.get("id").asLong();
+                flashCardDEF.setId(id);
+            }
+            flashCardDEF.setQuestion(node.get("question").asText());
+            flashCardDEF.setAnswer(node.get("answer").asText());
+            flashCardDEF.setUserId(node.get("userId").asLong());
+            return flashCardDEF;
         }catch (IllegalArgumentException | JsonProcessingException | NullPointerException e){
             throw new InvalidFlashCardException("This value is not compatible to FlashCardDEF. FlashCardDEF requires String question, String answer, and Long user_id");
         }

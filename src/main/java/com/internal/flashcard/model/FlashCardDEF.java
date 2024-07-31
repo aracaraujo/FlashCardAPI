@@ -82,4 +82,8 @@ public class FlashCardDEF {
     public void setLastModified(LocalDate lastModified) {
         this.lastModified = lastModified;
     }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 }
