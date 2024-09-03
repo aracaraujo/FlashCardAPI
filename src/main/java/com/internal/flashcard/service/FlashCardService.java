@@ -5,6 +5,7 @@ import com.internal.flashcard.repository.FlashCardDEFRepository;
 import com.internal.flashcard.repository.FlashCardMCRepository;
 import com.internal.flashcard.repository.FlashCardTFRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import java.util.Date;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -43,8 +44,8 @@ public class FlashCardService {
             switch (type) {
                 case TF:
                     FlashCardTF flashCardTF = this.objectMapper.readValue(rawFlashCard, FlashCardTF.class);
-                    flashCardTF.setDateCreation(LocalDate.now());
-                    flashCardTF.setLastModified(LocalDate.now());
+                    flashCardTF.setDateCreation(new Date());
+                    flashCardTF.setLastModified(new Date());
                     this.flashCardTFRepository.save(flashCardTF);
                     return ResponseEntity
                             .created(URI.create(String.format("/api/flashcard/%s", flashCardTF.getId())))
@@ -103,7 +104,12 @@ public class FlashCardService {
             switch (type) {
                 case TF:
                     FlashCardTF flashCardTF = this.objectMapper.readValue(rawFlashCard, FlashCardTF.class);
-//                    flashCardTF.setDateCreation(LocalDate.now().plusDays(1));
+                    Optional<FlashCardTF> oldFlashCardTF = this.flashCardTFRepository.findById(flashCardTF.getId());
+                    if(oldFlashCardTF.isEmpty()){
+                        throw new Exception("The flashcard can not be edited because it does not exist.");
+                    }
+                    flashCardTF.setDateCreation(oldFlashCardTF.get().getDateCreation());
+                    flashCardTF.setLastModified(new Date());
                     this.flashCardTFRepository.save(flashCardTF);
                     return ResponseEntity.ok().body(String.format("Flash card %s edited.\nNew value: %s", flashCardTF.getId(),flashCardTF));
                 case DEF:
@@ -118,7 +124,12 @@ public class FlashCardService {
                     return ResponseEntity.ok().body(String.format("Flash card %s edited.\nNew value: \n%s", flashCardDEF.getId(), flashCardDEF));
                 case MC:
                     FlashCardMC flashCardMC = this.objectMapper.readValue(rawFlashCard, FlashCardMC.class);
-//                    flashCardMC.setDateCreation(LocalDate.now());
+                    Optional<FlashCardMC> oldFlashCardMC = this.flashCardMCRepository.findById(flashCardMC.getId());
+                    if (oldFlashCardMC.isEmpty()) {
+                        throw new Exception("The flashcard can not be edited because it does not exist.");
+                    }
+                    flashCardMC.setDateCreation(oldFlashCardMC.get().getDateCreation());
+                    flashCardMC.setLastModified(LocalDate.now());
                     this.flashCardMCRepository.save(flashCardMC);
                     return ResponseEntity.ok().body(String.format("Flash card %s edited.\nNew value: \n%s", flashCardMC.getId(), flashCardMC));
                 default:

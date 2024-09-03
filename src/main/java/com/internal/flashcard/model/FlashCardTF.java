@@ -3,7 +3,7 @@ package com.internal.flashcard.model;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.internal.flashcard.util.FlashCardTFDeserializer;
 import jakarta.persistence.*;
-import java.time.LocalDate;
+import java.util.Date;
 import static jakarta.persistence.GenerationType.IDENTITY;
 
 @JsonDeserialize(using = FlashCardTFDeserializer.class)
@@ -21,9 +21,9 @@ public class FlashCardTF {
     @Column(name = "user_id", nullable = false)
     private Long userId;
     @Column(name = "date_creation", nullable = false)
-    private LocalDate dateCreation;
+    private Date dateCreation;
     @Column(name = "last_modified", nullable = false)
-    private LocalDate lastModified;
+    private Date lastModified;
 
     public FlashCardTF() {}
 
@@ -31,6 +31,16 @@ public class FlashCardTF {
         this.question = question;
         this.answer = answer;
         this.userId = userId;
+        this.dateCreation = new Date();
+        this.lastModified = new Date();
+    }
+
+    public FlashCardTF(String question, Boolean answer, Long userId, Date dateCreation, Date lastModified){
+        this.question = question;
+        this.answer = answer;
+        this.userId = userId;
+        this.dateCreation = dateCreation;
+        this.lastModified = lastModified;
     }
 
     public Long getId(){
@@ -65,19 +75,19 @@ public class FlashCardTF {
         return String.format("FlashCard id: %d\nQuestion: %s\nAnswer: %b\nUser ID: %s",id,question,answer, userId);
     }
 
-    public LocalDate getDateCreation() {
+    public Date getDateCreation() {
         return dateCreation;
     }
 
-    public void setDateCreation(LocalDate dataTimeCreation) {
+    public void setDateCreation(Date dataTimeCreation) {
         this.dateCreation = dataTimeCreation;
     }
 
-    public LocalDate getLastModified() {
+    public Date getLastModified() {
         return lastModified;
     }
 
-    public void setLastModified(LocalDate lastModified) {
+    public void setLastModified(Date lastModified) {
         this.lastModified = lastModified;
     }
 

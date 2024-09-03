@@ -16,14 +16,18 @@ public class FlashCardMCDeserializer extends JsonDeserializer<FlashCardMC> {
     public FlashCardMC deserialize(JsonParser p, DeserializationContext deserializationContext) throws IOException, JacksonException {
         try{
             JsonNode node = p.getCodec().readTree(p);
-            String question = node.get("question").asText();
-            String optionOne = node.get("optionOne").asText();
-            String optionTwo = node.get("optionTwo").asText();
-            String optionThree = node.get("optionThree").asText();
-            String optionFour = node.get("optionFour").asText();
-            int answer = node.get("answer").asInt();
-            Long user_id = node.get("userId").asLong();
-            return new FlashCardMC(question,optionOne,optionTwo,optionThree,optionFour,answer,user_id);
+            FlashCardMC flashCardMC = new FlashCardMC();
+            if (node.has("id")) {
+                flashCardMC.setId(node.get("id").asLong());
+            }
+            flashCardMC.setQuestion(node.get("question").asText());
+            flashCardMC.setOptionOne(node.get("optionOne").asText());
+            flashCardMC.setOptionTwo(node.get("optionTwo").asText());
+            flashCardMC.setOptionThree(node.get("optionThree").asText());
+            flashCardMC.setOptionFour(node.get("optionFour").asText());
+            flashCardMC.setAnswer(node.get("answer").asInt());
+            flashCardMC.setUserId(node.get("userId").asLong());
+            return flashCardMC;
         }catch (IllegalArgumentException | JsonProcessingException | NullPointerException e){
             throw new InvalidFlashCardException("This value is not compatible to FlashCardDEF. FlashCardDEF requires String question,String optionOne, String optionTwo, String optionThree, String optionFour, int answer, and Long user_id");
         }

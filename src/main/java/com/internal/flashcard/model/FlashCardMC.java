@@ -108,7 +108,7 @@ public class FlashCardMC {
     }
 
     public String toString(){
-        return String.format("FlashCard id: %d\nQuestion: %s\n:Option One: %s\n:Option Two: %s\n:Option Three: %s\n:Option Four: %s\nAnswer: %b",id,question,optionOne,optionTwo,optionThree,optionFour,answer);
+        return String.format("FlashCard id: %d\nQuestion: %s\nOption One: %s\nOption Two: %s\nOption Three: %s\nOption Four: %s\nAnswer: %d",id,question,optionOne,optionTwo,optionThree,optionFour,answer);
     }
 
     public LocalDate getDateCreation() {
@@ -125,5 +125,9 @@ public class FlashCardMC {
 
     public void setLastModified(LocalDate lastModified) {
         this.lastModified = lastModified;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 }

@@ -18,10 +18,8 @@ public class FlashCardDEFDeserializer extends JsonDeserializer<FlashCardDEF> {
         try{
             FlashCardDEF flashCardDEF = new FlashCardDEF();
             JsonNode node = p.getCodec().readTree(p);
-            Long id;
             if (node.has("id")){
-                id = node.get("id").asLong();
-                flashCardDEF.setId(id);
+                flashCardDEF.setId(node.get("id").asLong());
             }
             flashCardDEF.setQuestion(node.get("question").asText());
             flashCardDEF.setAnswer(node.get("answer").asText());
